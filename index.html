@@ -7,27 +7,59 @@
 </head>
 <body>
     <div id="menu"></div>
-        <button id="like">Administrador</button>
-        <button id="like">Usuario</button>
+        <button data-bind="click:admin">Administrador</button>
+            <div data-bind="visible:adminIsEnable">
+                    <li>
+                        <label >InputName : </label>
+                        <input id="input-name">
+                    </li>
+                    <li>
+                    <label>Input URL: </label>
+                    <input id="input-URL"value="">
+                    </li>
+                    <li>
+                     <label>Clicks  : </label>
+                    <input id="input-clicks"value="">
+                    </li>
+                    <p>
+                     <button id="accept">Accept </button>
+                     <button data-bind="click:cancel">Cancel </button>
+                    </p>
+                </div>
+        <button data-bind="click:cancel">Usuario</button>
     <div id="main-content"></div>
-        <div id="Collages">
-            <button id="back">Atrás</button>
-            <img id="cat-img" src="" alt="cute cat">
+            <ul data-bind="foreach: catList">
+            <li data-bind="text: name, click: $parent.setCat"></li>
+            </ul>
+            
+            
+            <div data-bind="with: currentCat" >
+                <h2 data-bind="text:name"></h2>
+                <h3 data-bind="text:title"></h3>
+                <button data-bind="text:likes"></button>
+                 <img data-bind="click: $parent.incrementCounter, attr: {src: imgSRC}" src="" alt="cute cat">
+            </div>
+            <div data-bind="with: currentCat" >
+                <ul data-bind="foreach: commentUser" >
+                    <li>
+                        <button href="#" data-bind="click:$parents[1].removeComment" >X</button>
+                        <span data-bind="text: $data"></span>
+                    </li>
+                </ul>
+                <input data-bind="textInput: acceptVal"/>
+                 <button data-bind="click:$parent.userComment"class="btn btn-success">Comentar</button>
+            </div>
             <button id="like">Me gusta</button>
-            <button id="comment">Comentar...</button>
-            <button id="next">Siguiente</button>
-        </div>
-        <div id="comments">
-        </div>
-    <div id="comment">
-        <input id="name"></input>
-        <textarea></textarea>
-        <button id="comment2">Comentar</button>
+            <button data-bind="click: afterCat">Atrás</button>
+            <button data-bind="click: nextCat">Siguiente</button>
+    <div >
+       
         <button id="cancel">Cancelar</button>
     </div>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/lib/knockout-3.2.0.js"></script>
     <script src="js/app.js"></script>
-    <link rel="stylesheet" type="text/css" href="main.css">
 </body>
 </html>
