@@ -1,5 +1,5 @@
 // JavaScript source code
-var cats=[
+var pets=[
 	{
 		likes: 0,
 		name: "Athur",
@@ -81,14 +81,14 @@ var cats=[
 		commentUser:["hi","losdsdas","www"]
 	}
 ];
-var Cat= function(data){
+var Pet= function(data){
 	this.likes=ko.observable(data.likes);
 	this.name=ko.observable(data.name);
 	this.imgSRC=ko.observable(data.imgSRC);
 	this.imgAttrib=ko.observable(data.imgAttrib);
 	this.description=ko.observable(data.description);
 	this.commentUser = ko.observableArray(data.commentUser);
-	this.acceptVal=ko.observable();
+	
 	this.title = ko.computed(function() {
         var self = this;
         var clicks = self.likes();
@@ -109,14 +109,14 @@ var Cat= function(data){
 var ViewModel = function () {
     var self = this;
 	var cont =1;
-    this.catList = ko.observableArray([]);
-    // This is a View model from add Cat
+    this.petList = ko.observableArray([]);
+    // This is a View model from add Pet
 	this.setName=ko.observable();
 	this.setDir=ko.observable();
 	this.setLikes=ko.observable();
-
-	this.addCat=function(){	
-		cats.push({
+	this.acceptVal = ko.observable();
+	this.addPet=function(){	
+		pets.push({
 				likes: parseInt(this.setLikes()),
 				name: this.setName(),
 				imgSRC:this.setDir(),
@@ -124,22 +124,22 @@ var ViewModel = function () {
 				description:"",
 				commentUser:[]
 					});
-		console.log(cats[-1]);
-		this.catList.push( new Cat(cats[cats.length-1]) );
+		console.log(pets[-1]);
+		this.petList.push( new Pet(pets[pets.length-1]) );
 	}	
 
-	// This is a View model Cat
-	this.setCat = function(clickedCat) {
-        self.currentCat(clickedCat)
-		console.log(clickedCat);
+	// This is a View model Pet
+	this.setPet = function(clickedPet) {
+        self.currentPet(clickedPet)
+		console.log(clickedPet);
     };
 	
-	cats.forEach(function(catItem) {
-        self.catList.push( new Cat(catItem) );
+	pets.forEach(function(petItem) {
+        self.petList.push( new Pet(petItem) );
     });
-	this.currentCat = ko.observable( this.catList()[0] );
+	this.currentPet = ko.observable( this.petList()[0] );
 	self.removeComment=function(vari){
-		self.currentCat().commentUser.remove(vari);
+		self.currentPet().commentUser.remove(vari);
 	}
 	
 	this.incrementCounter = function() {
@@ -147,17 +147,26 @@ var ViewModel = function () {
     };
 	
     
+	//navigaton pet
+    this.nextPet = function() {
+		var id=this.petList.indexOf(this.currentPet());
+		self.currentPet(this.petList()[(id+1)%pets.length] )
+    };
+	this.afterPet = function() {
+		var id=this.petList.indexOf(this.currentPet());
+		if (id==0)id=pets.length;
+		self.currentPet(this.petList()[(id-1)%pets.length] )
+    };
+	this.isComment = ko.observable(false);
+	this.enableComment = function () {
+		if (self.isComment()) self.isComment(false);
+		else self.isComment(true);
+	}
+	this.commentIsEnable = ko.computed(function () {
+		commentIsEnable = this.isComment();
+		return commentIsEnable;
+	}, this);
 	
-    this.nextCat = function() {
-		var id=this.catList.indexOf(this.currentCat());
-		self.currentCat(this.catList()[(id+1)%cats.length] )
-    };
-	this.afterCat = function() {
-		var id=this.catList.indexOf(this.currentCat());
-		if (id==0)id=cats.length;
-		self.currentCat(this.catList()[(id-1)%cats.length] )
-    };
-
 	// This is a View model Admin
 	this.isAdmin=ko.observable(false);
 
@@ -176,7 +185,7 @@ var ViewModel = function () {
 
 	// This is a View model comments from User's
 	this.userComment= function(){
-		if(this.acceptVal()!='')this.commentUser.push(this.acceptVal());
+		if(this.acceptVal()!='')self.currentPet().commentUser.push(this.acceptVal());
 		this.acceptVal('');
 	}
 

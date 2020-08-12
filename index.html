@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
     <div id="header">
@@ -26,35 +27,42 @@
                     <input  data-bind="value: setLikes"value="">
                     </li>
                     <p>
-                     <button data-bind="click:addCat">Accept </button>
+                     <button data-bind="click:addPet">Accept </button>
                      <button data-bind="click:cancel">Cancel </button>
                     </p>
             </div>
-    <ul data-bind="foreach: catList">
-            <li><a data-bind="text: name, click: $parent.setCat"class="active" href="#" ></a></li>
+    <ul data-bind="foreach: petList">
+            <li><a data-bind="text: name, click: $parent.setPet"class="active" href="#" ></a></li>
             </ul>
     </div>
     <div id="main-content">
-            <div data-bind="with: currentCat" >
-                <h2 data-bind="text:name"></h2>
-                <h3 data-bind="text:title"></h3>
-                <button data-bind="text:likes"></button>
-                 <img data-bind="click: $parent.incrementCounter, attr: {src: imgSRC}" src="" alt="cute cat">
-            </div>
-            <button data-bind="click: afterCat">Atrás</button>
-            <button data-bind="click: nextCat">Siguiente</button>
-            </div>
+        <div data-bind="with: currentPet">
+            <h2 data-bind="text:name"></h2>
+            <h3 data-bind="text:title"></h3>
+            <button data-bind="click: $parent.incrementCounter" class="btnl lovit"><i class="material-icons">favorite</i></button>
+            <button data-bind="text:likes"></button>
+
+            <img data-bind="click: $parent.incrementCounter, attr: {src: imgSRC}" src="" alt="cute pet">
+        </div>
+        <button data-bind="click:enableComment" class="btnl blusky"><i class="material-icons">comment</i></button>
+        <button data-bind="click: afterPet" class="navi-button left">Atrás</button>
+        <button data-bind="click: nextPet" class="navi-button right">Siguiente</button>
+    </div>
     <div id="comment-content">
-            <div data-bind="with: currentCat" >
-                <ul data-bind="foreach: commentUser" >
-                    <li>
-                        <button href="#" data-bind="click:$parents[1].removeComment" >X</button>
-                        <span data-bind="text: $data"></span>
-                    </li>
-                </ul>
-                <input data-bind="textInput: acceptVal"/>
-                 <button data-bind="click:$parent.userComment"class="btn btn-success">Comentar</button>
-            </div>
+        <div data-bind="with: currentPet">
+            <ul data-bind="foreach: commentUser">
+                <li>
+                    <button href="#" data-bind="click:$parents[1].removeComment">X</button>
+                    <span data-bind="text: $data"></span>
+                </li>
+            </ul>
+
+        </div>
+        <div data-bind="visible:commentIsEnable" class="com">
+            <input data-bind="textInput: acceptVal" />
+            <button data-bind="click:userComment" class="btn btn-success">Comentar</button>
+        </div>
+    </div>
             <button id="like">Me gusta</button>
             <button id="cancel">Cancelar</button>
 
