@@ -110,47 +110,75 @@ var ViewModel = function () {
     var self = this;
 	var cont =1;
     this.catList = ko.observableArray([]);
-	this.isAdmin=ko.observable(false);
+    // This is a View model from add Cat
+	this.setName=ko.observable();
+	this.setDir=ko.observable();
+	this.setLikes=ko.observable();
 
+	this.addCat=function(){	
+		cats.push({
+				likes: parseInt(this.setLikes()),
+				name: this.setName(),
+				imgSRC:this.setDir(),
+				imgAttrib:"",
+				description:"",
+				commentUser:[]
+					});
+		console.log(cats[-1]);
+		this.catList.push( new Cat(cats[cats.length-1]) );
+	}	
 
-	this.adminIsEnable=ko.computed(function(){
-		var self=this;
-		adminIsEnable= this.isAdmin();
-		return adminIsEnable ;
-	},this);
-	this.admin=function(){
-		this.isAdmin(true);
-	}
-	this.cancel=function(){
-		this.isAdmin(false);
-	}
-	this.userComment= function(){
-		if(this.acceptVal()!='')this.commentUser.push(this.acceptVal());
-		this.acceptVal('');
-	}
-    cats.forEach(function(catItem) {
+	// This is a View model Cat
+	this.setCat = function(clickedCat) {
+        self.currentCat(clickedCat)
+		console.log(clickedCat);
+    };
+	
+	cats.forEach(function(catItem) {
         self.catList.push( new Cat(catItem) );
     });
 	this.currentCat = ko.observable( this.catList()[0] );
 	self.removeComment=function(vari){
 		self.currentCat().commentUser.remove(vari);
 	}
+	
 	this.incrementCounter = function() {
         this.likes(this.likes() +1);
     };
 	
-    this.setCat = function(clickedCat) {
-        self.currentCat(clickedCat)
-    };
+    
 	
     this.nextCat = function() {
 		var id=this.catList.indexOf(this.currentCat());
-		self.currentCat(this.catList()[(id+1)%10] )
+		self.currentCat(this.catList()[(id+1)%cats.length] )
     };
 	this.afterCat = function() {
 		var id=this.catList.indexOf(this.currentCat());
-		self.currentCat(this.catList()[(id-1)%10] )
+		if (id==0)id=cats.length;
+		self.currentCat(this.catList()[(id-1)%cats.length] )
     };
+
+	// This is a View model Admin
+	this.isAdmin=ko.observable(false);
+
+	this.adminIsEnable=ko.computed(function(){
+		adminIsEnable= this.isAdmin();
+		return adminIsEnable ;
+	},this);
+
+	this.admin=function(){
+		this.isAdmin(true);
+	}
+
+	this.cancel=function(){
+		this.isAdmin(false);
+	}
+
+	// This is a View model comments from User's
+	this.userComment= function(){
+		if(this.acceptVal()!='')this.commentUser.push(this.acceptVal());
+		this.acceptVal('');
+	}
 
 };
 
