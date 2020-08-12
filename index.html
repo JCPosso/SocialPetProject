@@ -6,39 +6,45 @@
     <title></title>
 </head>
 <body>
-    <div id="menu"></div>
+    <div id="header">
+        <h1 id="man tittle"> SOCIAL PET!</h1>
+    </div>
+    <div id="sidebar">
+         <button data-bind="click:cancel">Usuario</button>
         <button data-bind="click:admin">Administrador</button>
             <div data-bind="visible:adminIsEnable">
                     <li>
                         <label >InputName : </label>
-                        <input id="input-name">
+                        <input data-bind="textInput: setName">
                     </li>
                     <li>
                     <label>Input URL: </label>
-                    <input id="input-URL"value="">
+                    <input data-bind="textInput: setDir"value="">
                     </li>
                     <li>
                      <label>Clicks  : </label>
-                    <input id="input-clicks"value="">
+                    <input  data-bind="value: setLikes"value="">
                     </li>
                     <p>
-                     <button id="accept">Accept </button>
+                     <button data-bind="click:addCat">Accept </button>
                      <button data-bind="click:cancel">Cancel </button>
                     </p>
-                </div>
-        <button data-bind="click:cancel">Usuario</button>
-    <div id="main-content"></div>
-            <ul data-bind="foreach: catList">
-            <li data-bind="text: name, click: $parent.setCat"></li>
+            </div>
+    <ul data-bind="foreach: catList">
+            <li><a data-bind="text: name, click: $parent.setCat"class="active" href="#" ></a></li>
             </ul>
-            
-            
+    </div>
+    <div id="main-content">
             <div data-bind="with: currentCat" >
                 <h2 data-bind="text:name"></h2>
                 <h3 data-bind="text:title"></h3>
                 <button data-bind="text:likes"></button>
                  <img data-bind="click: $parent.incrementCounter, attr: {src: imgSRC}" src="" alt="cute cat">
             </div>
+            <button data-bind="click: afterCat">Atrás</button>
+            <button data-bind="click: nextCat">Siguiente</button>
+            </div>
+    <div id="comment-content">
             <div data-bind="with: currentCat" >
                 <ul data-bind="foreach: commentUser" >
                     <li>
@@ -50,13 +56,9 @@
                  <button data-bind="click:$parent.userComment"class="btn btn-success">Comentar</button>
             </div>
             <button id="like">Me gusta</button>
-            <button data-bind="click: afterCat">Atrás</button>
-            <button data-bind="click: nextCat">Siguiente</button>
-    <div >
-       
-        <button id="cancel">Cancelar</button>
-    </div>
+            <button id="cancel">Cancelar</button>
 
+    <link rel="stylesheet" type="text/css" href="main.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/lib/knockout-3.2.0.js"></script>
