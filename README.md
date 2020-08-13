@@ -3,15 +3,15 @@
  ## Casos de uso
  Dentro de la pagina web la interaccion con los distintos elementos de la pagina esta dado si  se identifica con modo usiario o administrador de la siguiente manera:
  *Modo Usiario:
- >-Escribir comentarios sobre la mascota
- >-Reaccionar
+ >-Escribir comentarios sobre la mascota.
+ >-Reaccionar.
  >-Leer informacion de la mascota
  *Modo Aministrador:
- >-Eliminar comentarios
- >-Aññadir comentarios
- >-reaccionar
- >-Añadir mascota
- >-Editar mascota
+ >-Eliminar comentarios.
+ >-Aññadir comentarios.
+ >-reaccionar.
+ >-Añadir mascota.
+ >-Editar mascota.
  
  ## Comenzando 🚀
 * Clone éste repositorio en su máquina local usando [SocialPetProyect](https://github.com/JCPosso/SocialPetProject.git)- Repositorio
@@ -53,4 +53,11 @@ Versiones actuales de la libreria :
 ## Licencia 📄
 Este proyecto está bajo licencia [LICENSE.txt](https://github.com/JCPosso/SocialPetProject/blob/master/LICENSE).
 ## Referencias
-Inspirando en:
+Recursos:
+*http://google.github.io/material-design-icons/
+*https://material.io/resources/icons/?style=baseline
+*https://api.jquery.com/
+*https://www.w3schools.com/jquery/
+*https://www.w3schools.com/css/
+*https://www.w3schools.com/js/
+*https://html-css-js.com/css/box-shadow/
