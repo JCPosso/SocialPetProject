@@ -1,6 +1,18 @@
 ﻿body
 {
 }
+#title {
+    color: #FFFFFF;
+    background: #0e8dbc;
+    text-shadow: 0 1px 0 #CCCCCC, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
+    color: #FFFFFF;
+    background: #0e8dbc;
+    text-align: center;
+}
+#demo {
+    -webkit-box-shadow: 0px 0px 0px 5px #A0A0A0, inset 0px 10px 27px -8px #141414, inset 0px -10px 27px -8px #A31925, 5px 5px 15px 5px rgba(255,16,44,0);
+    box-shadow: 0px 0px 0px 5px #A0A0A0, inset 0px 10px 27px -8px #141414, inset 0px -10px 27px -8px #A31925, 5px 5px 15px 5px rgba(255,16,44,0);
+}
 #sidebar {
     float:left;
     width:25%;
@@ -14,11 +26,13 @@
     padding:10px;
 }
 #comment-content {
-    width: 75%;
+    
     background-color: orange;
-    padding: 40px 350px;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 30px 200px;
+    margin-left: 450px;
+    margin-right: 400px;
+    max-height: 90px;
+    overflow-y: scroll;
 }
 ul {
   list-style-type: none;
@@ -112,4 +126,13 @@ div.com {
     right: 5;
     width: 300px;
     border: 3px solid #73AD21;
+}
+.box-comment {
+    -webkit-box-shadow: inset -1px 3px 8px 5px #1F87FF, 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(0,0,0,0);
+    box-shadow: inset -1px 3px 8px 5px #1F87FF, 5px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(0,0,0,0);
+    background: #1C6EA4;
+}
+
+body#tinymce {
+    background: #FFFFFF
 }

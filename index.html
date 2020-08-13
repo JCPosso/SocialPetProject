@@ -3,37 +3,40 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>SOCIAL PET!</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-    <div id="header">
-        <h1 id="man tittle"> SOCIAL PET!</h1>
+    <div id="title">
+        <h1 >Social Pet </h1>
     </div>
     <div id="sidebar">
-         <button data-bind="click:cancel">Usuario</button>
+        <button data-bind="click:cancel">Usuario</button>
         <button data-bind="click:admin">Administrador</button>
-            <div data-bind="visible:adminIsEnable">
-                    <li>
-                        <label >InputName : </label>
-                        <input data-bind="textInput: setName">
-                    </li>
-                    <li>
-                    <label>Input URL: </label>
-                    <input data-bind="textInput: setDir"value="">
-                    </li>
-                    <li>
-                     <label>Clicks  : </label>
-                    <input  data-bind="value: setLikes"value="">
-                    </li>
-                    <p>
-                     <button data-bind="click:addPet">Accept </button>
-                     <button data-bind="click:cancel">Cancel </button>
-                    </p>
+        <button data-bind="visible:adminIsEnable,click:enableAdder">Add New Pet</button>
+        <button data-bind="visible:adminIsEnable,click:enableEditor">Edit Actual Pet</button>
+        <div id="demo" data-bind="visible:adminIsEnable" >
+            <div data-bind="visible:editorIsEnable"style="position:absolute;top:130px;left:220px;bottom: 310px; right: 350px; width: 320px; border: 9px solid #73AD21;">
+                <p> <label>InputName : </label><input data-bind="textInput: setName"></p>
+                <p><label>Input URL: </label><input data-bind="textInput: setDir" value=""></p>
+                <p><label>Clicks  : </label><input data-bind="value: setLikes" value=""></p>
+
+                <button data-bind="click:editPet" class="btn btn-success">Editar </button>
+                <button data-bind="click:cancelEditor" class="btn btn-success" style="position:absolute;top:auto;right:10px;">Cancel </button>
             </div>
-    <ul data-bind="foreach: petList">
-            <li><a data-bind="text: name, click: $parent.setPet"class="active" href="#" ></a></li>
-            </ul>
+            <div data-bind="visible:adderIsEnable"style="position:absolute;top:130px;left:220px;bottom: 310px; right: 350px; width: 320px; border: 9px solid #73AD21;">
+                <p> <label>InputName : </label><input data-bind="textInput: setName"></p>
+                <p><label>Input URL: </label><input data-bind="textInput: setDir" value=""></p>
+                <p><label>Clicks  : </label><input data-bind="value: setLikes" value=""></p>
+
+                <button data-bind="click:addPet" class="btn btn-success">Añadir! </button>
+                <button data-bind="click:cancelAdder" class="btn btn-success" style="position:absolute;top:auto;right:10px;">Cancel </button>
+            </div>
+                
+        </div>
+        <ul data-bind="foreach: petList">
+            <li><a data-bind="text: name, click: $parent.setPet" class="active" href="#"></a></li>
+        </ul>
     </div>
     <div id="main-content">
         <div data-bind="with: currentPet">
@@ -48,12 +51,14 @@
         <button data-bind="click: afterPet" class="navi-button left">Atrás</button>
         <button data-bind="click: nextPet" class="navi-button right">Siguiente</button>
     </div>
-    <div id="comment-content">
-        <div data-bind="with: currentPet">
+    <div id="comment-content" >
+        <div data-bind="with: currentPet ">
             <ul data-bind="foreach: commentUser">
                 <li>
-                    <button href="#" data-bind="click:$parents[1].removeComment">X</button>
-                    <span data-bind="text: $data"></span>
+                    <div class="box-comment" style="font-family: Comic Sans MS;color: #ffffff;">
+                        <button href="#" data-bind="visible:$parents[1].isAdmin,click:$parents[1].removeComment">X</button>
+                        <span data-bind="text: $data"></span>
+                    </div>
                 </li>
             </ul>
 
