@@ -5,18 +5,28 @@
     <meta charset="utf-8" />
     <title>SOCIAL PET!</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/lib/knockout-3.2.0.js"></script>
+    
+
 </head>
 <body>
     <div id="title">
-        <h1 >Social Pet </h1>
+        <h1>Social Pet </h1>
     </div>
     <div id="sidebar">
-        <button data-bind="click:cancel">Usuario</button>
-        <button data-bind="click:admin">Administrador</button>
-        <button data-bind="visible:adminIsEnable,click:enableAdder">Add New Pet</button>
-        <button data-bind="visible:adminIsEnable,click:enableEditor">Edit Actual Pet</button>
-        <div id="demo" data-bind="visible:adminIsEnable" >
-            <div data-bind="visible:editorIsEnable"style="position:absolute;top:130px;left:220px;bottom: 310px; right: 350px; width: 320px; border: 9px solid #73AD21;">
+
+        <button data-bind="click:setAdmin">Administrador</button>
+        <button data-bind="visible:isAdmin,click:enableAdder">Add New Pet</button>
+        <button data-bind="visible:isAdmin,click:enableEditor">Edit Actual Pet</button>
+        <button data-bind="visible:isAdmin,click:elimPet">Eliminate Actual Pet</button>
+
+        <div id="BoxEditor" data-bind="visible:isAdmin">
+
+            <div data-bind="visible:editorIsEnable" style="position:absolute;top:130px;left:220px;bottom: 310px; right: 350px; width: 320px; border: 9px solid #73AD21;">
                 <p> <label>InputName : </label><input data-bind="textInput: setName"></p>
                 <p><label>Input URL: </label><input data-bind="textInput: setDir" value=""></p>
                 <p><label>Clicks  : </label><input data-bind="value: setLikes" value=""></p>
@@ -24,34 +34,38 @@
                 <button data-bind="click:editPet" class="btn btn-success">Editar </button>
                 <button data-bind="click:cancelEditor" class="btn btn-success" style="position:absolute;top:auto;right:10px;">Cancel </button>
             </div>
-            <div data-bind="visible:adderIsEnable"style="position:absolute;top:130px;left:220px;bottom: 310px; right: 350px; width: 320px; border: 9px solid #73AD21;">
+            <div data-bind="visible:adderIsEnable" style="position:absolute;top:130px;left:220px;bottom: 310px; right: 350px; width: 320px; border: 9px solid #73AD21;">
                 <p> <label>InputName : </label><input data-bind="textInput: setName"></p>
                 <p><label>Input URL: </label><input data-bind="textInput: setDir" value=""></p>
                 <p><label>Clicks  : </label><input data-bind="value: setLikes" value=""></p>
 
-                <button data-bind="click:addPet" class="btn btn-success">Añadir! </button>
+                <button data-bind="click:createNewPet" class="btn btn-success">Añadir! </button>
                 <button data-bind="click:cancelAdder" class="btn btn-success" style="position:absolute;top:auto;right:10px;">Cancel </button>
             </div>
-                
+
         </div>
+
         <ul data-bind="foreach: petList">
             <li><a data-bind="text: name, click: $parent.setPet" class="active" href="#"></a></li>
         </ul>
+
     </div>
     <div id="main-content">
         <div data-bind="with: currentPet">
             <h2 data-bind="text:name"></h2>
             <h3 data-bind="text:title"></h3>
-            <button data-bind="click: $parent.incrementCounter" class="btnl lovit"><i class="material-icons">favorite</i></button>
             <button data-bind="text:likes"></button>
-
-            <img data-bind="click: $parent.incrementCounter, attr: {src: imgSRC}" src="" alt="cute pet">
+            <div class="contenedor">
+                <img data-bind="click: $parent.incrementCounter, attr: {src: imgSRC}" src="" alt="cute pet" class=" imagen">
+            </div>
         </div>
+        <button data-bind="click: incrementCounter" class="btnl lovit"><i class="material-icons">favorite</i></button>
         <button data-bind="click:enableComment" class="btnl blusky"><i class="material-icons">comment</i></button>
         <button data-bind="click: afterPet" class="navi-button left">Atrás</button>
         <button data-bind="click: nextPet" class="navi-button right">Siguiente</button>
     </div>
-    <div id="comment-content" >
+
+    <div id="comment-content">
         <div data-bind="with: currentPet ">
             <ul data-bind="foreach: commentUser">
                 <li>
@@ -63,18 +77,12 @@
             </ul>
 
         </div>
-        <div data-bind="visible:commentIsEnable" class="com">
+
+        <div data-bind="visible:isComment" class="com">
             <input data-bind="textInput: acceptVal" />
             <button data-bind="click:userComment" class="btn btn-success">Comentar</button>
         </div>
     </div>
-            <button id="like">Me gusta</button>
-            <button id="cancel">Cancelar</button>
-
-    <link rel="stylesheet" type="text/css" href="main.css">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/lib/knockout-3.2.0.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
