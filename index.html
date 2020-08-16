@@ -23,6 +23,11 @@
                 <h3>Name :</h3><p data-bind="text:name"></p>
                 <h3>Description  :</h3><p data-bind="text:description"></p>
             </div>
+            <div class="box-description styleFont">
+                <h3>Contact Us : </h3>
+                <div id="map"></div>
+            </div>
+
         </div>
         <div id="sidebar">
 
@@ -101,7 +106,9 @@
                 <a href="https://SocialPet.com/"> Juan Camilo Posso G.</a>
             </div>
         </footer>
-        <script src="js/app.js"></script>
     </div>
+    <script src="script.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
