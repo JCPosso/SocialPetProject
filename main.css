@@ -61,6 +61,10 @@ img {
     padding: 1rem;
     outline-offset: 0.5rem;
 }
+#map {
+    height: 300px;
+    width: 100%;
+}
 .right {
     float:right;
     width: 50px;
