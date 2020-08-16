@@ -14,75 +14,94 @@
 
 </head>
 <body>
-    <div id="title">
-        <h1>Social Pet </h1>
-    </div>
-    <div id="sidebar">
-
-        <button data-bind="click:setAdmin">Administrador</button>
-        <button data-bind="visible:isAdmin,click:enableAdder">Add New Pet</button>
-        <button data-bind="visible:isAdmin,click:enableEditor">Edit Actual Pet</button>
-        <button data-bind="visible:isAdmin,click:elimPet">Eliminate Actual Pet</button>
-
-        <div id="BoxEditor" data-bind="visible:isAdmin">
-
-            <div data-bind="visible:editorIsEnable" style="position:absolute;top:130px;left:220px;bottom: 310px; right: 350px; width: 320px; border: 9px solid #73AD21;">
-                <p> <label>InputName : </label><input data-bind="textInput: setName"></p>
-                <p><label>Input URL: </label><input data-bind="textInput: setDir" value=""></p>
-                <p><label>Clicks  : </label><input data-bind="value: setLikes" value=""></p>
-
-                <button data-bind="click:editPet" class="btn btn-success">Editar </button>
-                <button data-bind="click:cancelEditor" class="btn btn-success" style="position:absolute;top:auto;right:10px;">Cancel </button>
-            </div>
-            <div data-bind="visible:adderIsEnable" style="position:absolute;top:130px;left:220px;bottom: 310px; right: 350px; width: 320px; border: 9px solid #73AD21;">
-                <p> <label>InputName : </label><input data-bind="textInput: setName"></p>
-                <p><label>Input URL: </label><input data-bind="textInput: setDir" value=""></p>
-                <p><label>Clicks  : </label><input data-bind="value: setLikes" value=""></p>
-
-                <button data-bind="click:createNewPet" class="btn btn-success">Añadir! </button>
-                <button data-bind="click:cancelAdder" class="btn btn-success" style="position:absolute;top:auto;right:10px;">Cancel </button>
-            </div>
-
+    <div style="background-color: #6EC6FF;">
+        <div id="title">
+            <h1>Social Pet </h1>
         </div>
-
-        <ul data-bind="foreach: petList">
-            <li><a data-bind="text: name, click: $parent.setPet" class="active" href="#"></a></li>
-        </ul>
-
-    </div>
-    <div id="main-content">
-        <div data-bind="with: currentPet">
-            <h2 data-bind="text:name"></h2>
-            <h3 data-bind="text:title"></h3>
-            <button data-bind="text:likes"></button>
-            <div class="contenedor">
-                <img data-bind="click: $parent.incrementCounter, attr: {src: imgSRC}" src="" alt="cute pet" class=" imagen">
+        <div id="right-content">
+            <div data-bind="with:currentPet" class="box-description styleFont">
+                <h3>Name :</h3><p data-bind="text:name"></p>
+                <h3>Description  :</h3><p data-bind="text:description"></p>
             </div>
         </div>
-        <button data-bind="click: incrementCounter" class="btnl lovit"><i class="material-icons">favorite</i></button>
-        <button data-bind="click:enableComment" class="btnl blusky"><i class="material-icons">comment</i></button>
-        <button data-bind="click: afterPet" class="navi-button left">Atrás</button>
-        <button data-bind="click: nextPet" class="navi-button right">Siguiente</button>
-    </div>
+        <div id="sidebar">
 
-    <div id="comment-content">
-        <div data-bind="with: currentPet ">
-            <ul data-bind="foreach: commentUser">
-                <li>
-                    <div class="box-comment" style="font-family: Comic Sans MS;color: #ffffff;">
-                        <button href="#" data-bind="visible:$parents[1].isAdmin,click:$parents[1].removeComment">X</button>
-                        <span data-bind="text: $data"></span>
-                    </div>
-                </li>
+            <button data-bind="click:setAdmin">Administrador</button>
+            <button data-bind="visible:isAdmin,click:enableAdder">Add New Pet</button>
+            <button data-bind="visible:isAdmin,click:enableEditor">Edit Actual Pet</button>
+            <button data-bind="visible:isAdmin,click:elimPet">Eliminate Actual Pet</button>
+
+            <div data-bind="visible:isAdmin">
+                <div data-bind="visible:editorIsEnable" class="BoxEditor" style="position:absolute;top:130px;left:220px;bottom: 310px; right: 350px; width: 320px; border: 9px solid #73AD21;">
+                    <p> <label>InputName : </label><input data-bind="textInput: setName"></p>
+                    <p><label>Input URL: </label><input data-bind="textInput: setDir" value=""></p>
+                    <p><label>Clicks  : </label><input data-bind="value: setLikes" value=""></p>
+
+                    <button data-bind="click:editPet" class="btn btn-success">Editar </button>
+                    <button data-bind="click:cancelEditor" class="btn btn-success" style="position:absolute;top:auto;right:10px;">Cancel </button>
+                </div>
+                <div data-bind="visible:adderIsEnable" class="BoxEditor" style="position:absolute;top:130px;left:220px;bottom: 310px; right: 350px; width: 320px; border: 9px solid #73AD21;">
+                    <p> <label>InputName : </label><input data-bind="textInput: setName"></p>
+                    <p><label>Input URL: </label><input data-bind="textInput: setDir" value=""></p>
+                    <p><label>Clicks  : </label><input data-bind="value: setLikes" value=""></p>
+
+                    <button data-bind="click:createNewPet" class="btn btn-success">Añadir! </button>
+                    <button data-bind="click:cancelAdder" class="btn btn-success" style="position:absolute;top:auto;right:10px;">Cancel </button>
+                </div>
+            </div>
+
+            <ul data-bind="foreach: petList">
+                <li><a data-bind="text: name, click: $parent.setPet" class="active" href="#"></a></li>
             </ul>
 
         </div>
-
+        <div id="main-content" style="display: grid; grid-template-rows: 50px 500px 50px 120px;">
+            <div data-bind="with: currentPet">
+                <h2 data-bind="text:name" class="box-comment" style="text-align:center"></h2>
+            </div>
+            <div style="display: grid; grid-template-columns: 50px 530px 80px;">
+                <div>
+                    <button data-bind="click: afterPet" class="navi-button left"><</button>
+                </div>
+                <div data-bind="with: currentPet" style="float:left;display: grid;grid-template-rows: 40px 400px;">
+                    <div>
+                        <button data-bind="text:likes" style="position:absolute;"></button>
+                        <button data-bind="click: $parent.incrementCounter" class="btnl lovit"><i class="material-icons">favorite</i></button>
+                        <button data-bind="click:$parent.enableComment" class="btnl blusky"><i class="material-icons">comment</i></button>
+                        <div class="contenedor">
+                            <img data-bind="click: $parent.incrementCounter, attr: {src: imgSRC}" src="" alt="cute pet" class=" kitten-image ">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button data-bind="click:nextPet" class="navi-button right">></button>
+                </div>
+            </div>
+            <h2 class="box-comment" style="text-align:center;">Comentarios</h2>
+            <div id="comment-content">
+                <div data-bind="with: currentPet ">
+                    <ul data-bind="foreach: commentUser">
+                        <li>
+                            <div class="box-comment" style="font-family: Comic Sans MS;color: #ffffff;">
+                                <button href="#" data-bind="visible:$parents[1].isAdmin,click:$parents[1].removeComment">X</button>
+                                <span data-bind="text: $data"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <div data-bind="visible:isComment" class="com">
             <input data-bind="textInput: acceptVal" />
             <button data-bind="click:userComment" class="btn btn-success">Comentar</button>
         </div>
+        <footer class="page-footer font-small blue">
+            <div class="footer-copyright text-center py-3">
+                © 2020 Copyright:
+                <a href="https://SocialPet.com/"> Juan Camilo Posso G.</a>
+            </div>
+        </footer>
+        <script src="js/app.js"></script>
     </div>
-    <script src="js/app.js"></script>
 </body>
 </html>
