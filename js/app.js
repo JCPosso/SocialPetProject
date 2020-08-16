@@ -104,13 +104,13 @@ var Pet = function (data) {
         var clicks = self.likes();
 		
         if(clicks < 10) {
-            title = self.name();
+            title = "";
         } else if (clicks < 20) {
-            title = self.name()+" Adopt me!!";
+            title = " Adopt me!!";
         } else if (clicks < 30) {
-            title = self.name()+"Give me Love !";
+            title = "Give me Love !";
         } else {
-            title = self.name()+"All Love me!";
+            title = "All Love me!";
         }
         return title;
 	}, this);
