@@ -26,10 +26,9 @@ describe('View Model', function () {
             expect(newListLength).toBe(initialLength + 1);
         });
         it('Should be able to edit Pet', function () {
-            var initialLength = v.petList().length;
-            addNewPet(v, v.petList());
-            var newListLength = v.petList().length;
-            expect(newListLength).toBe(initialLength + 1);
+            var initialName = v.currentPet().name();
+            var finalName = v.setName('otherAgain!');
+            expect(initialName).not.toBe(finalName);
         });
         it('shoould be able to remove pet', function () {
             removePet(thisNewPet, v.petList());
