@@ -4,13 +4,6 @@
 <head>
     <meta charset="utf-8" />
     <title>SOCIAL PET!</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" type="text/css" href="main.css">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/lib/knockout-3.2.0.js"></script>
-    
 
 </head>
 <body>
@@ -32,27 +25,22 @@
         <div id="sidebar">
 
             <button data-bind="click:setAdmin">Administrador</button>
-            <button data-bind="visible:isAdmin,click:enableAdder">Add New Pet</button>
-            <button data-bind="visible:isAdmin,click:enableEditor">Edit Actual Pet</button>
-            <button data-bind="visible:isAdmin,click:elimPet">Eliminate Actual Pet</button>
-
+            <div data-bind="visible:isUser">
+                <button data-bind="visible:isUser,click:enableAdder"> announce now!</button>
+            </div>
             <div data-bind="visible:isAdmin">
-                <div data-bind="visible:editorIsEnable" class="BoxEditor" style="position:absolute;top:130px;left:220px;bottom: 310px; right: 350px; width: 320px; border: 9px solid #73AD21;">
-                    <p> <label>InputName : </label><input data-bind="textInput: setName"></p>
-                    <p><label>Input URL: </label><input data-bind="textInput: setDir" value=""></p>
-                    <p><label>Clicks  : </label><input data-bind="value: setLikes" value=""></p>
+                <button data-bind="click:enableAdder">Add New Pet</button>
+                <button data-bind="click:enableEditor">Edit Actual Pet</button>
+                <button data-bind="click:elimPet" class="elim">Eliminate Actual Pet</button>
+            </div>
+            <div data-bind="visible:boxEdit" class="BoxEditor" style="">
+                <p> <label>InputName : </label><input data-bind="textInput: setName"></p>
+                <p><label>Input URL: </label><input data-bind="textInput: setDir" value=""></p>
+                <p><label>Clicks  : </label><input data-bind="value: setLikes" value=""></p>
+                <button data-bind="visible:adderIsEnable,click:createNewPet" class="btn btn-success">Añadir! </button>
+                <button data-bind="visible:editorIsEnable,click:editPet" class="btn btn-success">Editar </button>
+                <button data-bind="click:cancelBox" class="btn btn-success" style="position:absolute;top:auto;right:10px;">Cancel </button>
 
-                    <button data-bind="click:editPet" class="btn btn-success">Editar </button>
-                    <button data-bind="click:cancelEditor" class="btn btn-success" style="position:absolute;top:auto;right:10px;">Cancel </button>
-                </div>
-                <div data-bind="visible:adderIsEnable" class="BoxEditor" style="position:absolute;top:130px;left:220px;bottom: 310px; right: 350px; width: 320px; border: 9px solid #73AD21;">
-                    <p> <label>InputName : </label><input data-bind="textInput: setName"></p>
-                    <p><label>Input URL: </label><input data-bind="textInput: setDir" value=""></p>
-                    <p><label>Clicks  : </label><input data-bind="value: setLikes" value=""></p>
-
-                    <button data-bind="click:createNewPet" class="btn btn-success">Añadir! </button>
-                    <button data-bind="click:cancelAdder" class="btn btn-success" style="position:absolute;top:auto;right:10px;">Cancel </button>
-                </div>
             </div>
 
             <ul data-bind="foreach: petList" id="side">
@@ -70,13 +58,13 @@
                 </div>
                 <div data-bind="with: currentPet" style="float:left;display: grid;grid-template-rows: 40px 400px;">
                     <div>
-                        <button data-bind="text:lks"class="styleFont" style="position:absolute;top:645px;left:820px;background-color: #DC143C;"></button>
+                        <button data-bind="text:lks" class="styleFont likesStyle"></button>
                         <button data-bind="visible:$parent.isAdmin ,click: $parent.adopted" class="adoptButton" style="position:absolute;top:100px;left:350px;">Adopted</button>
                         <button data-bind="click: $parent.incrementCounter" class="btnl lovit"><i class="material-icons">favorite</i></button>
                         <button data-bind="click:$parent.enableComment" class="btnl blusky"><i class="material-icons">comment</i></button>
                         <div class="contenedor">
-                            <div data-bind="visible:isAdop"id="demotext" style="position:absolute;top:140px;left:650px;">Adopted</div>
-                            <img data-bind="click: $parent.incrementCounter, attr: {src: imgSRC},gray:isAdopted" id="imagen" src="" alt="cute pet" class="imagen kitten-image ">
+                            <div data-bind="visible:isAdop" id="mark" style="position:absolute;top:140px;left:650px;">Adopted</div>
+                            <img data-bind="click: $parent.incrementCounter, attr: {src: imgSRC},gray:isAdopted" id="imagen" src="" alt="cute pet" class="imagen kitten-image " style=" z-index: 20;">
                         </div>
                     </div>
                 </div>
@@ -84,7 +72,7 @@
                     <button data-bind="click:nextPet" class="navi-button right">></button>
                 </div>
             </div>
-            <h2 class="box-comment" style="text-align:center;">Comentarios</h2>
+            <h2 class="box-comment" style="text-align:center;">Comments</h2>
             <div id="comment-content">
                 <div data-bind="with: currentPet ">
                     <ul data-bind="foreach: commentUser">
@@ -109,8 +97,14 @@
             </div>
         </footer>
     </div>
-    <script src="script.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="js/lib/knockout-3.2.0.js"></script>
+    <script src="js/script.js"></script>
     <script src="js/app.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap"></script>
+    <link rel="stylesheet" type="text/css" href="main.css">
+
 </body>
 </html>
