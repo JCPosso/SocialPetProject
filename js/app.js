@@ -5,8 +5,8 @@ var pets=[
 		name: "Athur",
 		imgSRC:"img/arthur.jpg",
 		imgAttrib:"Udacy",
-		description:"I am so cutte",
-		commentUser: ['hi'],
+		description:"I protect myself very well, too much affection I know that I can be the best company!",
+		commentUser: ['He is a very beautiful puppy, I want to take him!', 'have nothing better to show?', 'I love that'],
 		userLiked: false,
 		isAdopted: false
 	},
@@ -16,7 +16,7 @@ var pets=[
 		imgSRC:"img/Sak.jpg",
 		imgAttrib:"Udacy",
 		description:"I am so cutte",
-		commentUser: ["hi", "losdsdas", "www"],
+		commentUser: ["I love him !!! It is very beautiful", "have nothing better to show?", "Horror!!!"],
 		userLiked: false,
 		isAdopted: false
 	},
@@ -25,8 +25,8 @@ var pets=[
 		name: "Tobias",
 		imgSRC:"img/Tobias.jpg",
 		imgAttrib:"Udacy",
-		description:"I am so cutte",
-		commentUser: ["hi", "mi"],
+		description:"I protect myself very well, too much affection I know that I can be the best company!",
+		commentUser: ["I hate adopting animals like this!", "# $ #% $% # $ !! , that breed of cats always damages everything !!!"],
 		userLiked: false,
 		isAdopted: false
 	},
@@ -35,8 +35,8 @@ var pets=[
 		name: "Tommy",
 		imgSRC:"img/Tommy.jpg",
 		imgAttrib:"Udacy",
-		description:"I am so cutte",
-		commentUser: ["hi", "losdsdas", "www"],
+		description:"who are very aware of me, I always need company, I do not like to be alone",
+		commentUser: ["hi", "losdsdas", "I love !!! Is very pretty"],
 		userLiked: false,
 		isAdopted: false
 	},
@@ -46,7 +46,7 @@ var pets=[
 		imgSRC:"img/Krhis.jpg",
 		imgAttrib:"DamianORG",
 		description:"I am so cutte",
-		commentUser: ["hi", "losdsdas", "www"],
+		commentUser: ["hi", "# $ #% $% # $ !! , that breed of cats always damages everything !!!", "www"],
 		userLiked: false,
 		isAdopted: false
 	},
@@ -55,7 +55,7 @@ var pets=[
 		name: "Rex",
 		imgSRC:"img/Rex.jpg",
 		imgAttrib:"Udacy",
-		description:"I am so cutte",
+		description:"who are very aware of me, I always need company, I do not like to be alone",
 		commentUser: ["hi", "losdsdas", "www"],
 		userLiked: false,
 		isAdopted: false
@@ -66,7 +66,7 @@ var pets=[
 		imgSRC:"img/Zlatan.jpg",
 		imgAttrib:"Udacy",
 		description:"I am so cutte",
-		commentUser: ["hi", "losdsdas", "www"],
+		commentUser: ["hi", "losdsdas", "I love !!! Is very pretty"],
 		userLiked: false,
 		isAdopted: false
 	},
@@ -76,7 +76,7 @@ var pets=[
 		imgSRC:"img/fufi.jpg",
 		imgAttrib:"Udacy",
 		description:"I am so cutte",
-		commentUser: ["hi", "losdsdas", "www"],
+		commentUser: ["I love !!! Is very pretty", "losdsdas", "I love !!! Is very pretty"],
 		userLiked: false,
 		isAdopted: false
 	},
@@ -86,7 +86,7 @@ var pets=[
 		imgSRC:"img/Mishi.jpg",
 		imgAttrib:"Udacy",
 		description:"I am so cutte",
-		commentUser: ["hi", "losdsdas", "www"],
+		commentUser: ["hi", "losdsdas", "I hate adopting animals like this!"],
 		userLiked: false,
 		isAdopted: false
 	},
@@ -96,7 +96,7 @@ var pets=[
 		imgSRC:"img/Zeus.jpg",
 		imgAttrib:"Udacy",
 		description:"I am so cutte",
-		commentUser: ["hi", "losdsdas", "www"],
+		commentUser: ["hi", "# $ #% $% # $ !! , that breed of cats always damages everything !!!", "www"],
 		userLiked: false,
 		isAdopted: false
 	}
@@ -160,6 +160,7 @@ var ViewModel = function () {
 	this.setName = ko.observable();
 	this.setDir = ko.observable();
 	this.setLikes = ko.observable();
+	this.setDescript = ko.observable();
 	this.acceptVal = ko.observable();
 	this.isComment = ko.observable(false);
 	// enable or disable Admin mode
@@ -176,6 +177,7 @@ var ViewModel = function () {
 	this.cleanBox = function () {
 		this.setName('');
 		this.setDir('');
+		this.setDescript('');
 		this.setLikes(0);
 	};
 	this.cancelBox = function () {
@@ -191,6 +193,7 @@ var ViewModel = function () {
 		this.setName(this.currentPet().name());
 		this.setDir(this.currentPet().imgSRC());
 		this.setLikes(this.currentPet().likes());
+		this.setDescript(this.currentPet().description());
 		this.boxEdit(true);
 	}
 	this.editPet = function () {
@@ -250,7 +253,7 @@ function addNewPet(vm,petList) {
 		name: vm.setName(),
 		imgSRC: vm.setDir(),
 		imgAttrib: "",
-		description: "",
+		description: vm.setDescript(),
 		commentUser: [],
 		userLiked: false
 	});
