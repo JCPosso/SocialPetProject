@@ -38,7 +38,6 @@ describe('View Model', function () {
             addNewComent(text, v.currentPet().commentUser());
             removeComment(text, v.currentPet().commentUser());
             expect(v.currentPet().commentUser()[0]).not.toBeDefined();
-
         });
     });
     describe("when in User mode", function () {
