@@ -55,14 +55,14 @@
                 </div>
             </div>
 
-            <ul data-bind="foreach: petList">
-                <li><a data-bind="text: name, click: $parent.setPet" class="active" href="#"></a></li>
+            <ul data-bind="foreach: petList" id="side">
+                <li><a data-bind="text: name, click: $parent.setPet" class="" href="#"></a></li>
             </ul>
 
         </div>
         <div id="main-content" style="display: grid; grid-template-rows: 50px 500px 50px 120px;">
             <div data-bind="with: currentPet">
-                <h2 data-bind="text:name" class="box-comment" style="text-align:center"></h2>
+                <h2 data-bind="text:title" class="box-comment" style="text-align:center"></h2>
             </div>
             <div style="display: grid; grid-template-columns: 50px 530px 80px;">
                 <div>
@@ -70,11 +70,13 @@
                 </div>
                 <div data-bind="with: currentPet" style="float:left;display: grid;grid-template-rows: 40px 400px;">
                     <div>
-                        <button data-bind="text:likes" style="position:absolute;"></button>
+                        <button data-bind="text:lks"class="styleFont" style="position:absolute;top:645px;left:820px;background-color: #DC143C;"></button>
+                        <button data-bind="visible:$parent.isAdmin ,click: $parent.adopted" class="adoptButton" style="position:absolute;top:100px;left:350px;">Adopted</button>
                         <button data-bind="click: $parent.incrementCounter" class="btnl lovit"><i class="material-icons">favorite</i></button>
                         <button data-bind="click:$parent.enableComment" class="btnl blusky"><i class="material-icons">comment</i></button>
                         <div class="contenedor">
-                            <img data-bind="click: $parent.incrementCounter, attr: {src: imgSRC}" src="" alt="cute pet" class=" kitten-image ">
+                            <div data-bind="visible:isAdop"id="demotext" style="position:absolute;top:140px;left:650px;">Adopted</div>
+                            <img data-bind="click: $parent.incrementCounter, attr: {src: imgSRC},gray:isAdopted" id="imagen" src="" alt="cute pet" class="imagen kitten-image ">
                         </div>
                     </div>
                 </div>
