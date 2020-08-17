@@ -141,7 +141,11 @@ var ViewModel = function () {
 	var self = this;
 	this.petList = ko.observableArray([]);
 
-	this.setPet = function (clickedPet) { self.currentPet(clickedPet); self.currentPet().isAdopted() };
+	this.setPet = function (clickedPet) {
+		self.currentPet(clickedPet);
+		self.currentPet().isAdopted();
+		if (self.editorIsEnable()) self.enableEditor();
+	};
 	pets.forEach(function (petItem) {
 		self.petList.push(new Pet(petItem));
 	});
@@ -150,6 +154,7 @@ var ViewModel = function () {
 	this.incrementCounter = function () {
 		if ((self.isAdmin() == false) && self.currentPet().userLiked() == false) { self.currentPet().userLiked(true); self.currentPet().likes(self.currentPet().likes() + 1); }
 		if (self.isAdmin()) self.currentPet().likes(self.currentPet().likes() + 1);
+		if (self.editorIsEnable()) self.setLikes(self.currentPet().likes());;
 	};
 	// observers for each pet data
 	this.setName = ko.observable();
@@ -159,42 +164,49 @@ var ViewModel = function () {
 	this.isComment = ko.observable(false);
 	// enable or disable Admin mode
 	this.isAdmin = ko.observable(false);
+	this.isUser = ko.observable(true);
 	this.setAdmin = function () {
-		self.isAdmin() ? self.isAdmin(false) : self.isAdmin(true);
+		if (self.isAdmin() == true) { self.isAdmin(false); self.isUser(true);self.cancelBox();}
+		else { self.isAdmin(true); self.isUser(false)};
 	}
 	//observers for pet editor
-	this.inputs = ko.observable(false);
 	this.editorIsEnable = ko.observable(false);
 	this.adderIsEnable = ko.observable(false);
+	this.boxEdit = ko.observable(false);
+	this.cleanBox = function () {
+		this.setName('');
+		this.setDir('');
+		this.setLikes(0);
+	};
+	this.cancelBox = function () {
+		this.cleanBox();
+		this.boxEdit(false);
+		self.adderIsEnable(false);
+		self.editorIsEnable(false);
+	};
 	// edit Pet 
 	this.enableEditor = function () {
-		self.inputs(true);
 		self.editorIsEnable(true);
 		self.adderIsEnable(false);
 		this.setName(this.currentPet().name());
 		this.setDir(this.currentPet().imgSRC());
 		this.setLikes(this.currentPet().likes());
+		this.boxEdit(true);
 	}
 	this.editPet = function () {
-		editActualPet(this.currentPet(), this.setName(), this.setDir(), this.setLikes());
+		editActualPet(self.currentPet(), self.setName(), self.setDir(), self.setLikes());
 	}
-	this.cancelEditor = function () { self.editorIsEnable(false); self.inputs(false); }
 	// add Pet
 	this.enableAdder = function () {
-		self.inputs(true);
 		self.adderIsEnable(true);
 		self.editorIsEnable(false);
-		this.setName('');
-		this.setDir('');
-		this.setLikes(0);
+		this.cleanBox();
+		this.boxEdit(true);
 	}
 	this.createNewPet = function () {
 		addNewPet(self,this.petList);
-		this.setName('');
-		this.setDir('');
-		this.setLikes(0);
+		this.cleanBox();
 	};
-	this.cancelAdder = function () { self.adderIsEnable(false); self.inputs(false); }
 	//remove Pet
 	this.elimPet = function () {
 		removePet(self.currentPet(), self.petList);
@@ -203,14 +215,12 @@ var ViewModel = function () {
 	//navigaton pet
     this.nextPet = function() {
 		var id=this.petList.indexOf(this.currentPet());
-		self.currentPet(this.petList()[(id + 1) % pets.length] );
-		self.currentPet().isAdopted();
+		self.setPet(this.petList()[(id + 1) % pets.length] );
     };
 	this.afterPet = function() {
 		var id=this.petList.indexOf(this.currentPet());
 		if (id==0)id=pets.length;
-		self.currentPet(this.petList()[(id - 1) % pets.length]);
-		self.currentPet().isAdopted();
+		self.setPet(this.petList()[(id - 1) % pets.length]);
     };
 	// This is a View model comments from User's
 	this.enableComment = function () {
@@ -285,5 +295,8 @@ $(document).ready(function () {
 			$('.active').parent().prev().children().toggleClass('active');
 			$('.active').last().removeClass('active');
 		}
+	});
+	$('.elim').click(function () {
+		$('#side li a ').first().addClass("active");
 	});
 }); 
