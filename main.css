@@ -47,7 +47,7 @@ img {
     width: 450px;
     height: 450px;
 }
-#demotext {
+#mark {
     color: #616161;
     background: #bababa;
     text-shadow: #e0e0e0 1px 1px 0;
@@ -100,6 +100,20 @@ img {
     -webkit-box-shadow: 0px 0px 0px 5px #A0A0A0, inset 0px 10px 27px -8px #141414, inset 0px -10px 27px -8px #A31925, inset 5px 5px 15px 5px rgba(0,0,0,0);
     box-shadow: 0px 0px 0px 5px #A0A0A0, inset 0px 10px 27px -8px #141414, inset 0px -10px 27px -8px #A31925, inset 5px 5px 15px 5px rgba(0,0,0,0);
     background: #3DA484;
+    position: absolute;
+    top: 130px;
+    left: 220px;
+    bottom: 310px;
+    right: 350px;
+    width: 320px;
+    border: 9px solid #73AD21;
+    z-index: 40;
+}
+.likesStyle {
+    position: absolute;
+    top: 645px;
+    left: 820px;
+    background-color: #DC143C;
 }
 body#tinymce {
     background: #FFFFFF
