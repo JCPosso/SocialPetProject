@@ -37,7 +37,6 @@
     text-decoration: none;
     text-shadow: 0px 1px 0px #810e05;
 }
-
 .left {
     float: left;
     width: 50px;
@@ -45,8 +44,16 @@
 }
 img {
     margin-left: 10px;
-    width: 500px;
-    height: 500px;
+    width: 450px;
+    height: 450px;
+}
+#demotext {
+    color: #616161;
+    background: #bababa;
+    text-shadow: #e0e0e0 1px 1px 0;
+    color: #616161;
+    background: #bababa;
+    text-align:center;
 }
 .kitten-image {
     -webkit-box-shadow: 10px 10px 19px 2px rgba(0,0,0,0.75);
@@ -94,7 +101,6 @@ img {
     box-shadow: 0px 0px 0px 5px #A0A0A0, inset 0px 10px 27px -8px #141414, inset 0px -10px 27px -8px #A31925, inset 5px 5px 15px 5px rgba(0,0,0,0);
     background: #3DA484;
 }
-
 body#tinymce {
     background: #FFFFFF
 }
@@ -114,7 +120,6 @@ body#tinymce {
     color: #000000;
     font-style: italic;
 }
-
 ul {
   list-style-type: none;
   margin: 0;
@@ -146,8 +151,8 @@ li a:hover:not(.active) {
 }
 .lovit {
     background-color: #DC143C;
-    top: 610px;
-    left: 720px;
+    top: 645px;
+    left: 790px;
     padding: 5px;
 }
 .btnl:hover {
@@ -155,8 +160,8 @@ li a:hover:not(.active) {
 }
 .blusky {
     background-color: #6495ED;
-    top: 610px;
-    left: 620px;
+    top: 645px;
+    left: 550px;
     padding: 5px;
 }
 .navi-button :hover {
@@ -167,7 +172,6 @@ li a:hover:not(.active) {
     position: relative;
     top: 1px;
 }
-
 div.com {
     position: fixed;
     bottom: 30px;
