@@ -2,17 +2,17 @@
  Este es una maqueta front-end de pagina web para adopcion de mascotas.
  ## Casos de uso
  Dentro de la pagina web la interaccion con los distintos elementos de la pagina esta dado si  se identifica con modo usiario o administrador de la siguiente manera:
- *Modo Usiario:
- >-Escribir comentarios sobre la mascota.
- >-Reaccionar.
- >-Leer informacion de la mascota
- *Modo Aministrador:
- >-Eliminar comentarios.
- >-Aññadir comentarios.
- >-reaccionar.
- >-Añadir mascota.
- >-Editar mascota.
- 
+ * Modo Usiario:
+ >- Escribir comentarios sobre la mascota.
+ >- Reaccionar.
+ >- Anunciar Mascota. 
+ * Modo Aministrador:
+ >- Eliminar comentarios.
+ >- Añadir comentarios.
+ >- reaccionar.
+ >- Añadir mascota.
+ >- Editar mascota.
+ >- Eliminar mascota.
  ## Comenzando 🚀
 * Clone éste repositorio en su máquina local usando [SocialPetProyect](https://github.com/JCPosso/SocialPetProject.git)- Repositorio
 ### Pre-requisitos 📋
@@ -43,7 +43,7 @@ Para comprobar que Git se instaló correctamente solo vamos a Windows -> y escri
 ## Ejecutando las pruebas ⚙️
 Para ejecutar los test debe hacer uso de Jasmine y verificar que cada uno de los  contenidos javascript tanto de la pagina como las de las pruebas esten debidamente cargados para que no genere ningun problema al cargar los Script , Por otra parte tambien  cargar los script para usar las distintas librerias Knokout js y Jquery ytilizadas  para que se lean cada una de las pruebas. 
 ### Pruebas end-to-end 🔩
-![](src/p.png)
+![](img/p.png)
 Casa una de las pruebas se hiciweron para verificar cada uno  de los casus de uso plateados para el proyecto , de este modo se hace una breve explicacion de cada uno de ellos:
 ```
  describe("when in administrator mode", function () {
